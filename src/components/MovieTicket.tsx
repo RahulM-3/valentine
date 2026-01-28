@@ -58,7 +58,7 @@ const Row = ({ label, value }) => (
 );
 
 const barcodeRef = useRef<HTMLCanvasElement>(null);
-const barcodeLink = "https://github.com/RahulM-3/valentine";
+const barcodeLink = "https://www.instagram.com/reel/DUDuf01k6SHWY7PEpmN_iBlEk0VJu0z1xz7gM00/?igsh=MXF0OWhlb3p6NnZwbg==";
 
 useEffect(() => {
   if (!barcodeRef.current) return;
