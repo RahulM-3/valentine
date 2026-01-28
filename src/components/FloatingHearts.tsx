@@ -13,10 +13,17 @@ interface FloatingItem {
 
 // Placeholder images - replace these with your actual photos
 const coupleImages = [
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
+  "/pic (1).jpg",
+  "/pic (2).jpg",
+  "/pic (3).jpg",
+  "/pic (4).jpg",
+  "/pic (5).jpg",
+  "/pic (6).jpg",
+  "/pic (7).jpg",
+  "/pic (8).jpg",
+  "/pic (9).jpg",
+  "/pic (10).jpg",
+  "/pic (11).jpg"
 ];
 
 const FloatingHearts = () => {
@@ -39,11 +46,11 @@ const FloatingHearts = () => {
       }
       
       // Add floating images
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < coupleImages.length-1; i++) {
         newItems.push({
           id: 100 + i,
           x: 10 + Math.random() * 80,
-          delay: Math.random() * 12,
+          delay: Math.random() * 20,
           duration: 12 + Math.random() * 8,
           size: 60 + Math.random() * 40,
           type: "image",
