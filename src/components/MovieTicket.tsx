@@ -2,14 +2,17 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import bwipjs from "bwip-js";
+
+
 const MovieTicket = () => {
   const ticketRef = useRef<HTMLDivElement>(null);
 
   // Placeholder data - replace with your actual information
   const ticketData = {
     name: "Rahul",
-    partnerName: "Thulasi",
-    date: "February 14, 2025",
+    partnerName: "‎ ‎ Thulasi Brindha",
+    date: "‎ ‎ February 14, 2026",
     code: "VAL-69-LOVE",
     seat: "Forever Together"
   };
@@ -48,11 +51,31 @@ const MovieTicket = () => {
   
 /* Helper row */
 const Row = ({ label, value }) => (
-  <div className="flex justify-between">
+  <div className="flex justify-left gap-6">
     <span className="text-rose-400">{label}</span>
     <span className="font-medium text-rose-700">{value}</span>
   </div>
 );
+
+const barcodeRef = useRef<HTMLCanvasElement>(null);
+const barcodeLink = "https://github.com/RahulM-3/valentine";
+
+useEffect(() => {
+  if (!barcodeRef.current) return;
+
+  try {
+    bwipjs.toCanvas(barcodeRef.current, {
+      bcid: "pdf417", // 2D ticket barcode
+      text: `${barcodeLink}|${ticketData.code}`,
+      scale: 2,
+      columns: 3,
+      height: 12,
+      includetext: false,
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}, []);
 
 
   return (
@@ -78,7 +101,7 @@ const Row = ({ label, value }) => (
       <div className="relative flex h-full font-clean">
 
         {/* LEFT */}
-        <div className="flex-1 px-6 py-5 flex flex-col justify-between border-r border-dashed border-amber-300/50">
+        <div className="flex-1 px-4 py-5 flex flex-col justify-between border-r border-dashed border-amber-300/50">
 
           {/* Header */}
           <div>
@@ -91,33 +114,33 @@ const Row = ({ label, value }) => (
           </div>
 
           {/* Details */}
-          <div className="space-y-2 text-sm">
-            <Row label="Guest" value={ticketData.name} />
-            <Row label="With" value={ticketData.partnerName} />
-            <Row label="Date" value={ticketData.date} />
+          <div className="space-y-1 text-sm">
+            <Row label="Guest:" value={ticketData.name} />
+            <Row label="With:" value={ticketData.partnerName} />
+            <Row label="Date:" value={ticketData.date} />
           </div>
-
-          <p className="text-[10px] text-rose-400 tracking-wide">
+          <p className="text-[10px] text-rose-400 tracking-wide py-2">
             Freaky mode allowed ✨
           </p>
         </div>
 
         {/* RIGHT STUB */}
-        <div className="w-28 px-3 py-4 flex flex-col items-center justify-between bg-gradient-to-b from-rose-100 to-rose-200">
+        <div className="w-28 px-3 py-4 flex items-center justify-center bg-gradient-to-b from-rose-100 to-rose-200">
 
-          <span className="text-2xl">💍</span>
+          {/* Rotated container */}
+          <div className="flex flex-col items-center gap-2 -rotate-90">
 
-          <div className="-rotate-90 whitespace-nowrap">
-            <p className="text-[10px] tracking-widest font-mono text-rose-500">
+            {/* 2D Barcode */}
+            <canvas
+              ref={barcodeRef}
+              className="w-40 max-w-none"
+            />
+
+            {/* Code */}
+            <p className="text-[10px] tracking-widest font-mono text-rose-600">
               {ticketData.code}
             </p>
-          </div>
 
-          <div className="text-center">
-            <p className="text-[10px] text-rose-400">Seat</p>
-            <p className="text-sm font-semibold text-rose-700">
-              {ticketData.seat}
-            </p>
           </div>
         </div>
       </div>
