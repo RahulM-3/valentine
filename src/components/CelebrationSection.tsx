@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useCallback } from "react";
 import confetti from "canvas-confetti";
+import MovieTicket from "./MovieTicket";
 
 const CelebrationSection = () => {
   const fireConfetti = useCallback(() => {
@@ -98,16 +99,8 @@ const CelebrationSection = () => {
           Best decision ever 💕
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="valentine-card mt-8 mb-8"
-        >
-          <p className="text-xl font-semibold text-foreground">
-            See you on Feb 14, Valentine 😘
-          </p>
-        </motion.div>
+        {/* Movie Ticket */}
+        <MovieTicket />
 
         {/* Animated hearts */}
         <motion.div
