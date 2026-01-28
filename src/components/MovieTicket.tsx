@@ -2,18 +2,15 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
 const MovieTicket = () => {
   const ticketRef = useRef<HTMLDivElement>(null);
 
   // Placeholder data - replace with your actual information
   const ticketData = {
-    name: "Your Name Here",
-    partnerName: "Partner Name",
+    name: "Rahul",
+    partnerName: "Thulasi",
     date: "February 14, 2025",
-    time: "7:00 PM",
-    venue: "Our Special Place",
-    code: "VAL-2025-LOVE",
+    code: "VAL-69-LOVE",
     seat: "Forever Together"
   };
 
@@ -42,129 +39,115 @@ const MovieTicket = () => {
   };
 
   useEffect(() => {
-    // Auto-download after a short delay to let animation complete
     const timer = setTimeout(() => {
-      downloadAsPDF();
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
+  
+/* Helper row */
+const Row = ({ label, value }) => (
+  <div className="flex justify-between">
+    <span className="text-rose-400">{label}</span>
+    <span className="font-medium text-rose-700">{value}</span>
+  </div>
+);
+
+
   return (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    className="w-full max-w-md mx-auto my-10"
+  >
     <motion.div
-      initial={{ opacity: 0, y: 50, rotateX: 90 }}
-      animate={{ opacity: 1, y: 0, rotateX: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.5 }}
-      className="w-full max-w-md mx-auto my-8"
+      animate={{ y: [0, -6, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      ref={ticketRef}
+      className="relative overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl"
+      style={{ aspectRatio: "2/1" }}
     >
-      {/* Ticket Container */}
-      <div
-        ref={ticketRef}
-        className="relative bg-gradient-to-r from-rose-100 via-pink-50 to-rose-100 rounded-2xl overflow-hidden shadow-2xl"
-        style={{ aspectRatio: "2/1" }}
-      >
-        {/* Ticket Left Section */}
-        <div className="flex h-full">
-          <div className="flex-1 p-5 flex flex-col justify-between border-r-2 border-dashed border-pink-300">
-            {/* Header */}
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-2xl">🎬</span>
-                <h3 className="text-lg font-bold text-pink-600 font-romantic">
-                  Valentine's Date
-                </h3>
-              </div>
-              <p className="text-xs text-pink-400 uppercase tracking-wider">
-                Admit Two
-              </p>
-            </div>
+      {/* Gold border */}
+      <div className="absolute inset-0 rounded-3xl border border-amber-300/40 pointer-events-none" />
 
-            {/* Details */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-pink-400">Name:</span>
-                <span className="font-semibold text-pink-700">{ticketData.name}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-pink-400">With:</span>
-                <span className="font-semibold text-pink-700">{ticketData.partnerName}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-pink-400">Date:</span>
-                <span className="font-semibold text-pink-700">{ticketData.date}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-pink-400">Time:</span>
-                <span className="font-semibold text-pink-700">{ticketData.time}</span>
-              </div>
-            </div>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-[#fff7f2] to-rose-100" />
 
-            {/* Venue */}
-            <div className="text-center">
-              <p className="text-xs text-pink-400">📍 {ticketData.venue}</p>
-            </div>
+      <div className="relative flex h-full font-clean">
+
+        {/* LEFT */}
+        <div className="flex-1 px-6 py-5 flex flex-col justify-between border-r border-dashed border-amber-300/50">
+
+          {/* Header */}
+          <div>
+            <h3 className="text-xl font-romantic font-semibold tracking-wide text-rose-700">
+              Valentine's Invitation
+            </h3>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-rose-400 mt-1">
+              Admit Two
+            </p>
           </div>
 
-          {/* Ticket Right Section (Stub) */}
-          <div className="w-24 p-3 flex flex-col items-center justify-between bg-gradient-to-b from-pink-200 to-rose-200">
-            <div className="text-center">
-              <span className="text-3xl">💕</span>
-              <p className="text-xs font-bold text-pink-600 mt-1">VALID</p>
-            </div>
-
-            <div className="text-center transform -rotate-90 whitespace-nowrap">
-              <p className="text-[10px] font-mono text-pink-500">{ticketData.code}</p>
-            </div>
-
-            <div className="text-center">
-              <p className="text-[10px] text-pink-500">Seat</p>
-              <p className="text-xs font-bold text-pink-700">{ticketData.seat}</p>
-            </div>
+          {/* Details */}
+          <div className="space-y-2 text-sm">
+            <Row label="Guest" value={ticketData.name} />
+            <Row label="With" value={ticketData.partnerName} />
+            <Row label="Date" value={ticketData.date} />
           </div>
+
+          <p className="text-[10px] text-rose-400 tracking-wide">
+            Freaky mode allowed ✨
+          </p>
         </div>
 
-        {/* Decorative circles for ticket perforation look */}
-        <div className="absolute left-[calc(100%-96px-12px)] top-0 w-6 h-3 bg-background rounded-b-full"></div>
-        <div className="absolute left-[calc(100%-96px-12px)] bottom-0 w-6 h-3 bg-background rounded-t-full"></div>
+        {/* RIGHT STUB */}
+        <div className="w-28 px-3 py-4 flex flex-col items-center justify-between bg-gradient-to-b from-rose-100 to-rose-200">
 
-        {/* Sparkle decorations */}
-        <motion.div
-          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.2, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute top-2 right-28 text-lg"
-        >
-          ✨
-        </motion.div>
-        <motion.div
-          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.2, 1] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-          className="absolute bottom-2 left-2 text-lg"
-        >
-          ✨
-        </motion.div>
+          <span className="text-2xl">💍</span>
+
+          <div className="-rotate-90 whitespace-nowrap">
+            <p className="text-[10px] tracking-widest font-mono text-rose-500">
+              {ticketData.code}
+            </p>
+          </div>
+
+          <div className="text-center">
+            <p className="text-[10px] text-rose-400">Seat</p>
+            <p className="text-sm font-semibold text-rose-700">
+              {ticketData.seat}
+            </p>
+          </div>
+        </div>
       </div>
 
-      {/* Download Button */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        onClick={downloadAsPDF}
-        className="mt-4 w-full valentine-button flex items-center justify-center gap-2"
-      >
-        📥 Download Ticket
-      </motion.button>
+      {/* Perforation */}
+      <div className="absolute right-[6.5rem] top-0 w-5 h-3 bg-white rounded-b-full" />
+      <div className="absolute right-[6.5rem] bottom-0 w-5 h-3 bg-white rounded-t-full" />
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="text-center text-sm text-muted-foreground mt-3"
+      {/* Soft sparkles */}
+      <motion.span
+        animate={{ opacity: [0.3, 1, 0.3] }}
+        transition={{ duration: 3, repeat: Infinity }}
+        className="absolute top-3 right-32 text-sm"
       >
-        Your ticket is being downloaded automatically! 💕
-      </motion.p>
+        ✨
+      </motion.span>
     </motion.div>
-  );
+
+    {/* Download */}
+    <motion.button
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 }}
+      onClick={downloadAsPDF}
+      className="mt-6 w-full rounded-full py-3 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-clean font-medium shadow-lg hover:scale-[1.02] transition"
+>
+      Download Invitation
+    </motion.button>
+  </motion.div>
+);
 };
 
 export default MovieTicket;

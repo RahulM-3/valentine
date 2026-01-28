@@ -14,6 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        clean: ["Inter", "sans-serif"],
         sans: ['Quicksand', 'sans-serif'],
         romantic: ['Pacifico', 'cursive'],
       },

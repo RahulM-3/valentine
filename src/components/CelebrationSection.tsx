@@ -87,7 +87,7 @@ const CelebrationSection = () => {
           transition={{ delay: 0.3 }}
           className="text-5xl font-bold gradient-text mb-4 font-romantic"
         >
-          YAYYYY!!
+          Yesss Mommyyyy!!!
         </motion.h2>
 
         <motion.p
