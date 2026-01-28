@@ -29,7 +29,7 @@ const FinalMessage = () => {
             Thank you for making my life brighter every single day.
           </p>
           <p className="text-lg text-foreground leading-relaxed">
-            Can't wait to celebrate us 💖
+            Can't wait to celebrate us 💜
           </p>
         </motion.div>
 
@@ -60,7 +60,7 @@ const FinalMessage = () => {
           transition={{ delay: 0.9 }}
           className="mt-12 flex justify-center gap-6 text-3xl opacity-60"
         >
-          {["💕", "🌹", "💖", "🌹", "💕"].map((emoji, index) => (
+          {["💕", "🌹", "💗", "🌹", "💕"].map((emoji, index) => (
             <motion.span
               key={index}
               animate={{ y: [0, -8, 0] }}
