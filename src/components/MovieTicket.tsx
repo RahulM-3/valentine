@@ -65,13 +65,12 @@ useEffect(() => {
 
   try {
     bwipjs.toCanvas(barcodeRef.current, {
-      bcid: "pdf417", // 2D ticket barcode
+      bcid: "pdf417",
       text: `${barcodeLink}|${ticketData.code}`,
       scale: 2,
-      columns: 3,
       height: 12,
       includetext: false,
-    });
+    } as any);
   } catch (e) {
     console.error(e);
   }
@@ -119,8 +118,8 @@ useEffect(() => {
             <Row label="With:" value={ticketData.partnerName} />
             <Row label="Date:" value={ticketData.date} />
           </div>
-          <p className="text-[10px] text-rose-400 tracking-wide py-2">
-            Freaky mode allowed ✨
+          <p className="text-[9px] text-rose-400 tracking-wide">
+            Customer Care: +91 9363264866
           </p>
         </div>
 
