@@ -63,7 +63,7 @@ const CelebrationSection = () => {
   }, [fireConfetti]);
 
   return (
-  <section className="min-h-screen flex flex-col items-center px-6 py-12 relative">
+  <section className="h-screen flex flex-col items-center justify-center px-6 py-8 relative overflow-hidden">
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
