@@ -63,72 +63,74 @@ const CelebrationSection = () => {
   }, [fireConfetti]);
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 py-12 relative overflow-hidden">
+  <section className="min-h-screen flex flex-col items-center px-6 py-12 relative">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+      className="text-center"
+    >
       <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="text-center"
+        animate={{
+          rotate: [0, -10, 10, -10, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 1 }}
+        className="text-8xl mb-6"
       >
-        <motion.div
-          animate={{ 
-            rotate: [0, -10, 10, -10, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 0.8, repeat: Infinity, repeatDelay: 1 }}
-          className="text-8xl mb-6"
-        >
-          🎉
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="text-5xl font-bold gradient-text mb-4 font-romantic"
-        >
-          Yesss Mommyyyy!!!
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-2xl text-foreground mb-2"
-        >
-          Best decision ever 💕
-        </motion.p>
-
-        {/* Movie Ticket */}
-        <MovieTicket />
-
-        {/* Animated hearts */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="flex justify-center gap-4 text-4xl"
-        >
-          {["💖", "💕", "💗", "💓", "💝"].map((heart, index) => (
-            <motion.span
-              key={index}
-              animate={{ 
-                y: [0, -15, 0],
-                rotate: [0, 10, -10, 0]
-              }}
-              transition={{ 
-                duration: 1.5, 
-                repeat: Infinity, 
-                delay: index * 0.2 
-              }}
-            >
-              {heart}
-            </motion.span>
-          ))}
-        </motion.div>
+        🎉
       </motion.div>
-    </section>
-  );
+
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="text-4xl font-bold gradient-text mb-2 font-romantic inline-block overflow-visible pb-3"
+      >
+        Yesss Mommyyyy!!!
+      </motion.h2>
+
+      {/* Spacer */}
+      <div className="h-6" />
+
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="text-2xl text-foreground"
+      >
+        Best decision ever 💕
+      </motion.p>
+
+      <MovieTicket />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="flex justify-center gap-4 text-4xl mt-6"
+      >
+        {["💖", "💕", "💗", "💓", "💝"].map((heart, index) => (
+          <motion.span
+            key={index}
+            animate={{
+              y: [0, -15, 0],
+              rotate: [0, 10, -10, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              delay: index * 0.2,
+            }}
+          >
+            {heart}
+          </motion.span>
+        ))}
+      </motion.div>
+    </motion.div>
+  </section>
+);
+
 };
 
 export default CelebrationSection;

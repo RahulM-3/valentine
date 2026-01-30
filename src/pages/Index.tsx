@@ -2,7 +2,6 @@ import { useState } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
 import QuestionSection from "@/components/QuestionSection";
 import CelebrationSection from "@/components/CelebrationSection";
-import FinalMessage from "@/components/FinalMessage";
 
 const Index = () => {
   const [showCelebration, setShowCelebration] = useState(false);
@@ -23,7 +22,6 @@ const Index = () => {
         ) : (
           <>
             <CelebrationSection />
-            <FinalMessage />
           </>
         )}
       </div>
