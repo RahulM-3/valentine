@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import bwipjs from "bwip-js";
-
 
 const MovieTicket = () => {
   const ticketRef = useRef<HTMLDivElement>(null);
@@ -17,27 +15,22 @@ const MovieTicket = () => {
     seat: "Forever Together"
   };
 
-  const downloadAsPDF = async () => {
+  const downloadAsImage = async () => {
     if (!ticketRef.current) return;
 
     try {
       const canvas = await html2canvas(ticketRef.current, {
-        scale: 2,
+        scale: 3,
         backgroundColor: null,
         useCORS: true,
       });
 
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "mm",
-        format: [150, 80],
-      });
-
-      pdf.addImage(imgData, "PNG", 0, 0, 150, 80);
-      pdf.save("valentine-ticket.pdf");
+      const link = document.createElement("a");
+      link.download = "valentine-ticket.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
     } catch (error) {
-      console.error("Error generating PDF:", error);
+      console.error("Error generating image:", error);
     }
   };
 
@@ -163,7 +156,7 @@ useEffect(() => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.2 }}
-      onClick={downloadAsPDF}
+      onClick={downloadAsImage}
       className="mt-6 w-full rounded-full py-3 bg-gradient-to-r from-rose-400 to-pink-400 text-white font-clean font-medium shadow-lg hover:scale-[1.02] transition"
 >
       Download Invitation
