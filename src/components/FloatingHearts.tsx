@@ -11,19 +11,22 @@ interface FloatingItem {
   imageIndex?: number;
 }
 
+// Base path for GitHub Pages deployment
+const basePath = import.meta.env.BASE_URL;
+
 // Placeholder images - replace these with your actual photos
 const coupleImages = [
-  "/pic (1).jpg",
-  "/pic (2).jpg",
-  "/pic (3).jpg",
-  "/pic (4).jpg",
-  "/pic (5).jpg",
-  "/pic (6).jpg",
-  "/pic (7).jpg",
-  "/pic (8).jpg",
-  "/pic (9).jpg",
-  "/pic (10).jpg",
-  "/pic (11).jpg"
+  `${basePath}pic (1).jpg`,
+  `${basePath}pic (2).jpg`,
+  `${basePath}pic (3).jpg`,
+  `${basePath}pic (4).jpg`,
+  `${basePath}pic (5).jpg`,
+  `${basePath}pic (6).jpg`,
+  `${basePath}pic (7).jpg`,
+  `${basePath}pic (8).jpg`,
+  `${basePath}pic (9).jpg`,
+  `${basePath}pic (10).jpg`,
+  `${basePath}pic (11).jpg`
 ];
 
 const FloatingHearts = () => {
